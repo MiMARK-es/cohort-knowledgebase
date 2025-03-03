@@ -1,11 +1,15 @@
+import os
 import dash
 from dash import dcc, html
 import requests
 
+# Use the correct backend URL
+BACKEND_URL = os.getenv("BACKEND_URL", "https://backend-axfy.onrender.com")
+
 app = dash.Dash(__name__)
 
 def get_cohorts():
-    response = requests.get("http://backend:8000/cohorts")
+    response = requests.get(f"{BACKEND_URL}/cohorts")
     return response.json() if response.status_code == 200 else []
 
 app.layout = html.Div([
